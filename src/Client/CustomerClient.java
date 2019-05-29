@@ -3,13 +3,16 @@ package Client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 public class CustomerClient {
 
 	public static String getUserInput(String field) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Enter " + field + ": ");
-		return br.readLine();
+		return br.readLine().trim();
 	}
 
 	private static boolean isNaN(String str) {
@@ -44,7 +47,7 @@ public class CustomerClient {
 		else return false;
 	}
 
-	public static void main(String args[]) throws Exception
+	public static void main(String args[]) throws RemoteException, NotBoundException, MalformedURLException, IOException
 	{
 		boolean isValidCustomerId = false;
 		boolean isValidChoice = false;
@@ -56,29 +59,34 @@ public class CustomerClient {
 				customerId = getUserInput("Customer Id");
 				isValidCustomerId = validate(customerId);
 			}
-			isValidCustomerId = false;
 			CustomerClientManager customerClientManager = new CustomerClientManager(customerId);
 			while (true) {
 				showMenu();
 				while (!isValidChoice) {
-					choice = Integer.parseInt(getUserInput("your choice"));
+					choice = Integer.parseInt(getUserInput("your choice").trim());
 					isValidChoice = validateCustomerChoice(choice);
 				}
 				switch (choice) {
 					case 1:
-						String eventDate = getUserInput("Event Date");
+						String eventDate = getUserInput("Event Date").trim();
 						String eventType = getUserInput("Event type \n1. Conference\n2. Seminar \n3. Trade Show");
 						while(!(eventType.equals("Conference") || eventType.equals("Seminar") ||
 								eventType.equals("Trade Show"))){
 							eventType = getUserInput("correct event type \n1. Conference\n2. Seminar \n3. Trade Show");
 						}
-						String eventTimeSlot = getUserInput("Event Slot\n1.Morning(M)\n2.Afternoon(A)\3.Evening(E)");
-							while(!(eventTimeSlot.equals("M") || eventTimeSlot.equals("A") ||
-									eventTimeSlot.equals("E"))){
-								eventTimeSlot = getUserInput("correct event slot \n1.Morning(M)\n2.Afternoon(A)\3.Evening(E)");
-							}
-						String eventID = customerId.substring(0, 3) + eventTimeSlot + eventDate;
-						customerClientManager.bookEvent(customerId, eventID,eventType);
+						String eventTimeSlot = getUserInput("Event Slot\n1.Morning(M)\n2.Afternoon(A)\n3.Evening(E)");
+						while(!(eventTimeSlot.equals("M") || eventTimeSlot.equals("A") ||
+								eventTimeSlot.equals("E"))){
+							eventTimeSlot = getUserInput("correct event slot \n1.Morning(M)\n2.Afternoon(A)\n3.Evening(E)");
+						}
+						String cityToBookEvent = getUserInput("city to book event \n1. TOR\n2. MTL \n3. OTW");
+						while(!(cityToBookEvent.equals("TOR") || cityToBookEvent.equals("MTL") ||
+								cityToBookEvent.equals("OTW"))){
+							eventType = getUserInput("city to book event \n1. TOR\n2. MTL \n3. OTW");
+						}
+						String eventID = cityToBookEvent + eventTimeSlot + eventDate;
+						String acknowledgement = customerClientManager.bookEvent(customerId, eventID,eventType);
+						System.out.println("\n"+customerId+" "+acknowledgement+"\n");
 						break;
 
 					case 2:
@@ -87,15 +95,21 @@ public class CustomerClient {
 
 					case 3:
 						eventDate = getUserInput("Event Date");
+						eventType = getUserInput("Event type \n1. Conference\n2. Seminar \n3. Trade Show");
+						while(!(eventType.equals("Conference") || eventType.equals("Seminar") ||
+								eventType.equals("Trade Show"))){
+							eventType = getUserInput("correct event type \n1. Conference\n2. Seminar \n3. Trade Show");
+						}
 						eventTimeSlot = getUserInput("Event Slot\n1.Morning(M)\n2.Afternoon(A)\3.Evening(E)");
 						while(!(eventTimeSlot.equals("M") || eventTimeSlot.equals("A") ||
 								eventTimeSlot.equals("E"))){
 							eventTimeSlot = getUserInput("correct event slot \n1.Morning(M)\n2.Afternoon(A)\3.Evening(E)");
 						}
 						eventID = customerId.substring(0, 3) + eventTimeSlot + eventDate;
-						customerClientManager.cancelEvent(customerId, eventID);
+						customerClientManager.cancelEvent(customerId, eventID, eventType);
 						break;
 				}
+				isValidChoice = false;
 			}
 		}
 	}

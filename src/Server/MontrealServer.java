@@ -11,10 +11,9 @@ public class MontrealServer {
 	public static void main(String args[]) throws Exception
 	{
 		EMS obj = new EMS();
-		
+
 		Registry registry = LocateRegistry.createRegistry(PORTS.MTL.label);
-		registry.bind("EMS", obj);
+		registry.rebind("EMS", obj);
 		System.out.println("Montreal Server up and running!!!");
 	}
-	
 }

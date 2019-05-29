@@ -1,10 +1,12 @@
 package ServerInterface;
 
 import java.rmi.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface EMSCustomerInterface extends Remote{
 
-	public int bookEvent(String customerID, String eventID, String eventType) throws RemoteException;
-	public int getBookingSchedule(String customerID) throws RemoteException;
-	public int cancelEvent(String customerID, String eventID) throws RemoteException;
+	public String bookEvent(String customerID, String eventID, String eventType) throws RemoteException;
+	public HashMap<String, ArrayList<String>> getBookingSchedule(String customerID) throws RemoteException, NotBoundException;
+	public int cancelEvent(String customerID, String eventID, String eventType) throws RemoteException;
 }

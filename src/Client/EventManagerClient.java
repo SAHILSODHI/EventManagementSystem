@@ -19,7 +19,7 @@ public class EventManagerClient {
 
 		Registry registry = LocateRegistry.getRegistry(port);
 		EMSEventManagerInterface obj = (EMSEventManagerInterface) registry.lookup("EMS");
-		int n = obj.bookEvent("", "", "");
+		String n = obj.bookEvent("", "", "");
 		System.out.println("Addition is : " + n);
 	}
 }

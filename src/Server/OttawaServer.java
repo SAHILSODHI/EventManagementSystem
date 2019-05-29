@@ -13,7 +13,7 @@ public class OttawaServer {
 		EMS obj = new EMS();
 		
 		Registry registry = LocateRegistry.createRegistry(PORTS.OTW.label);
-		registry.bind("EMS", obj);
+		registry.rebind("EMS", obj);
 		System.out.println("Ottawa Server up and running!!!");
 	}
 	

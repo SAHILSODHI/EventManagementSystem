@@ -13,7 +13,7 @@ public class TorontoServer {
 		EMS obj = new EMS();
 
 		Registry registry = LocateRegistry.createRegistry(PORTS.TOR.label);
-		registry.bind("EMS", obj);
+		registry.rebind("EMS", obj);
 		System.out.println("Toronto Server up and running!!!");
 	}
 
