@@ -7,7 +7,7 @@ public enum PORTS {
 	
 	public final Integer label;
 	 
-    private PORTS(Integer label) {
+    PORTS(Integer label) {
         this.label = label;
     }
  

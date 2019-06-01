@@ -1,7 +1,9 @@
-package Client;
+package client;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+
+import client.customer.controller.CustomerClientManager;
 
 public class TestConcurrency implements Runnable{
 
@@ -24,15 +26,15 @@ public class TestConcurrency implements Runnable{
 
     @Override
     public void run() {
-        try {
-            CustomerClientManager customerClientManager = new CustomerClientManager(this.customerId);
-            String acknowledgement = customerClientManager.bookEvent(this.customerId, "TORA100519", "Conference");
-            System.out.println(acknowledgement + this.customerId);
-
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            CustomerClientManager customerClientManager = new CustomerClientManager(this.customerId);
+//            String acknowledgement = customerClientManager.bookEvent(this.customerId, "TORA100519", "Conference");
+//            System.out.println(acknowledgement + this.customerId);
+//
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        } catch (NotBoundException e) {
+//            e.printStackTrace();
+//        }
     }
 }
