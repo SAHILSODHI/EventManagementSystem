@@ -1,11 +1,11 @@
 package client.eventmanager.controller;
 
-import serverInterface.EMSEventManagerInterface;
-
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import server.controller.rmiEMSInterface.EMSEventManagerInterface;
 
 public class EventManagerClientManager implements EMSEventManagerInterface {
 
@@ -24,7 +24,7 @@ public class EventManagerClientManager implements EMSEventManagerInterface {
     }
 
     @Override
-    public HashMap<String, ArrayList<String>> getBookingSchedule(String customerID) throws RemoteException, NotBoundException {
+    public ArrayList<String> getBookingSchedule(String customerID) throws RemoteException, NotBoundException {
 
         return emsEventManagerObj.getBookingSchedule(customerID);
     }
@@ -48,7 +48,7 @@ public class EventManagerClientManager implements EMSEventManagerInterface {
 	}
 
 	@Override
-	public int listEventAvailability(String eventType) throws RemoteException {
+	public HashMap<String, Integer> listEventAvailability(String eventType) throws RemoteException {
 
 		return emsEventManagerObj.listEventAvailability(eventType);
 	}

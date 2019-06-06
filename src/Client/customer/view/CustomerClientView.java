@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import client.customer.controller.CustomerClientManager;
-import client.util.IDManager;
 
 public class CustomerClientView {
 	
@@ -74,13 +73,10 @@ public class CustomerClientView {
 				break;
 
 			case 2:
-				HashMap<String, ArrayList<String>> allEvents = customerClientManager.getBookingSchedule(customerId);
+				ArrayList<String> allEvents = customerClientManager.getBookingSchedule(customerId);
 				System.out.println("\nList of events booked: ");
-				for(String key: allEvents.keySet()){
-					ArrayList<String> eventIds = allEvents.get(key);
-					for(String events: eventIds){
-						System.out.println(events);
-					}
+				for(String key: allEvents){
+					System.out.println(key);
 				}
 				System.out.println("\n");
 				break;

@@ -11,8 +11,8 @@ import client.customer.controller.CustomerClientManager;
 import client.customer.view.CustomerClientView;
 import client.util.IDManager;
 import enums.PORTS;
-import serverInterface.EMSCustomerInterface;
-import serverInterface.EMSEventManagerInterface;
+import server.controller.rmiEMSInterface.EMSCustomerInterface;
+import server.controller.rmiEMSInterface.EMSEventManagerInterface;
 
 public class CustomerClient {
 

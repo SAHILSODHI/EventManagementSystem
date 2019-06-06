@@ -10,7 +10,7 @@ import client.eventmanager.controller.EventManagerClientManager;
 import client.eventmanager.view.EventManagerClientView;
 import client.util.IDManager;
 import enums.PORTS;
-import serverInterface.EMSEventManagerInterface;
+import server.controller.rmiEMSInterface.EMSEventManagerInterface;
 
 public class EventManagerClient {
 

@@ -4,13 +4,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import enums.PORTS;
-import implementRemoteInterface.EMS;
+import server.controller.rmiEMSInterfaceImplementation.EMS;
 
 public class OttawaServer {
 	
 	public static void main(String[] args) throws Exception
 	{
-		EMS obj = new EMS();
+		EMS obj = new EMS(PORTS.OTW.name());
 		
 		Registry registry = LocateRegistry.createRegistry(PORTS.OTW.label);
 		registry.rebind("EMS", obj);

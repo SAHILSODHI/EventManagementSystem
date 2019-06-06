@@ -1,11 +1,11 @@
 package client.customer.controller;
 
-import serverInterface.EMSCustomerInterface;
-
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import server.controller.rmiEMSInterface.EMSCustomerInterface;
 
 public class CustomerClientManager implements EMSCustomerInterface {
 
@@ -24,7 +24,7 @@ public class CustomerClientManager implements EMSCustomerInterface {
     }
 
     @Override
-    public HashMap<String, ArrayList<String>> getBookingSchedule(String customerID) throws RemoteException, NotBoundException {
+    public ArrayList<String> getBookingSchedule(String customerID) throws RemoteException, NotBoundException {
 
         return emsCustomerObj.getBookingSchedule(customerID);
     }
